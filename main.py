@@ -1,21 +1,13 @@
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
+from fastapi.responses import FileResponse
+import os
 
 app = FastAPI()
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/")
 def read_root():
-    return """
-    <html>
-        <head>
-            <title>Hello Page</title>
-        </head>
-        <body>
-            <h1>Hello World</h1>
-            <p>Welcome to my FastAPI server 🚀</p>
-        </body>
-    </html>
-    """
+    file_path = os.path.join(os.path.dirname(__file__), "index.html")
+    return FileResponse(file_path)
 
 @app.get('/user')
 def get_user():
