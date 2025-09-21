@@ -2,10 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Hello Page</title>
+  <title>User Info</title>
 </head>
 <body>
-  <h1>Hello World</h1>
-  <p>Welcome to my FastAPI server 🚀</p>
+  <h1>Fetch User API Example</h1>
+  <button onclick="getUser()">Get User</button>
+  
+  <div id="result"></div>
+
+  <script>
+    async function getUser() {
+      try {
+        const response = await fetch('/user');
+        const data = await response.json();
+        document.getElementById("result").innerHTML =
+          `<p><b>Name:</b> ${data.name}</p>
+           <p><b>Age:</b> ${data.age}</p>
+           <p><b>Contact:</b> ${data.contact}</p>`;
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    }
+  </script>
 </body>
 </html>
